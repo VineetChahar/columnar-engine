@@ -1,3 +1,4 @@
 build/
+build_release/
 .DS_Store
 *.o
