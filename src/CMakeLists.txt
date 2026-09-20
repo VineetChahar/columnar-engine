@@ -1,6 +1,12 @@
 add_library(columnar_core STATIC
   column_chunk.cpp
   file_format.cpp
+  lexer.cpp
+  parser.cpp
+  expression.cpp
+  logical_plan.cpp
+  operators.cpp
+  optimizer.cpp
 )
 
 target_include_directories(columnar_core PUBLIC

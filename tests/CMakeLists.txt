@@ -4,6 +4,7 @@ add_executable(columnar_tests
   test_zone_map.cpp
   test_column_chunk.cpp
   test_file_format.cpp
+  test_engine.cpp
   test_stubs.cpp
 )
 
