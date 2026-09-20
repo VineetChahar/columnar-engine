@@ -50,6 +50,8 @@ void append_column(ExecColumn& dest, const ExecColumn& src) {
   }
 }
 
+}  // namespace
+
 ExecBatch materialize_all(Operator& op) {
   ExecBatch full;
   bool initialized = false;
@@ -69,6 +71,8 @@ ExecBatch materialize_all(Operator& op) {
   }
   return full;
 }
+
+namespace {
 
 std::vector<ExecBatch> split_into_batches(const ExecBatch& full, std::size_t vector_size) {
   std::vector<ExecBatch> out;

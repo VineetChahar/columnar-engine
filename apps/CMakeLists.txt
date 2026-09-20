@@ -1,0 +1,5 @@
+add_executable(columnar_server server_main.cpp)
+target_link_libraries(columnar_server PRIVATE columnar_core)
+
+add_executable(columnar_cli cli_main.cpp)
+target_link_libraries(columnar_cli PRIVATE columnar_core)

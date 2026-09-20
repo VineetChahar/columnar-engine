@@ -32,6 +32,12 @@ struct ScanStats {
   std::size_t rows_produced = 0;
 };
 
+// Pulls every batch from `op` and concatenates them into one ExecBatch.
+// Used internally by HashAggregate/Sort/HashJoin's build side (anything
+// that needs to see all its input before producing output), and by the
+// server to materialize a whole result set for one wire response.
+ExecBatch materialize_all(Operator& op);
+
 // Decodes one storage ColumnChunkVariant (whatever its encoding) into a
 // dense ExecColumn. This is the boundary where storage encoding stops
 // mattering to the rest of the engine -- dictionary/RLE columns get

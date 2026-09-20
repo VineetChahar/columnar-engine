@@ -36,6 +36,7 @@ if(COLUMNAR_ENABLE_ASAN OR COLUMNAR_ENABLE_UBSAN)
 endif()
 
 add_subdirectory(src)
+add_subdirectory(apps)
 
 if(COLUMNAR_BUILD_TESTS OR COLUMNAR_BUILD_BENCHMARKS)
   include(FetchContent)

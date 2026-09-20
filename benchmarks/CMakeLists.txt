@@ -1,2 +1,5 @@
 add_executable(columnar_bench_encoding bench_encoding.cpp)
 target_link_libraries(columnar_bench_encoding PRIVATE columnar_core benchmark::benchmark)
+
+add_executable(columnar_bench_operators bench_operators.cpp)
+target_link_libraries(columnar_bench_operators PRIVATE columnar_core benchmark::benchmark)
