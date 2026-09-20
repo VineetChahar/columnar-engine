@@ -37,6 +37,7 @@ endif()
 
 add_subdirectory(src)
 add_subdirectory(apps)
+add_subdirectory(tools)
 
 if(COLUMNAR_BUILD_TESTS OR COLUMNAR_BUILD_BENCHMARKS)
   include(FetchContent)

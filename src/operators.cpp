@@ -555,9 +555,15 @@ HashJoinOperator::HashJoinOperator(OperatorPtr left, OperatorPtr right, JoinType
 void HashJoinOperator::build_right_side() {
   build_batch_ = materialize_all(*right_);
   const ExecColumn& key_col = build_batch_.columns[right_key_index_];
+  int64_keyed_ = (key_col.type == ExecType::kInt64);
+
   for (std::size_t row = 0; row < build_batch_.row_count(); ++row) {
     if (!key_col.validity[row]) continue;
-    build_index_[stringify_key(key_col, row)].push_back(static_cast<std::uint32_t>(row));
+    if (int64_keyed_) {
+      build_index_int64_[key_col.ints()[row]].push_back(static_cast<std::uint32_t>(row));
+    } else {
+      build_index_string_[stringify_key(key_col, row)].push_back(static_cast<std::uint32_t>(row));
+    }
   }
 }
 
@@ -574,13 +580,24 @@ std::optional<ExecBatch> HashJoinOperator::next() {
     for (std::size_t row = 0; row < probe->row_count(); ++row) {
       bool matched = false;
       if (key_col.validity[row]) {
-        auto it = build_index_.find(stringify_key(key_col, row));
-        if (it != build_index_.end()) {
-          for (std::uint32_t br : it->second) {
-            left_rows.push_back(static_cast<std::uint32_t>(row));
-            right_rows.push_back(br);
+        if (int64_keyed_) {
+          auto it = build_index_int64_.find(key_col.ints()[row]);
+          if (it != build_index_int64_.end()) {
+            for (std::uint32_t br : it->second) {
+              left_rows.push_back(static_cast<std::uint32_t>(row));
+              right_rows.push_back(br);
+            }
+            matched = true;
           }
-          matched = true;
+        } else {
+          auto it = build_index_string_.find(stringify_key(key_col, row));
+          if (it != build_index_string_.end()) {
+            for (std::uint32_t br : it->second) {
+              left_rows.push_back(static_cast<std::uint32_t>(row));
+              right_rows.push_back(br);
+            }
+            matched = true;
+          }
         }
       }
       if (!matched && type_ == JoinType::kLeft) {

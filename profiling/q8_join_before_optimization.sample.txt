@@ -1,0 +1,408 @@
+Analysis of sampling profile_join (pid 71799) every 1 millisecond
+Process:         profile_join [71799]
+Path:            /Users/USER/*/profile_join
+Load Address:    0x10239c000
+Identifier:      profile_join
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  launchd [1]
+Target Type:     live task
+
+Date/Time:       2026-09-20 20:53:40.467 +0530
+Launch Time:     2026-09-20 20:53:38.818 +0530
+OS Version:      macOS 26.5.2 (25F84)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         554.4M
+Physical footprint (peak):  636.6M
+Idle exit:                  untracked
+----
+
+Call graph:
+    4798 Thread_22955180   DispatchQueue_1: com.apple.main-thread  (serial)
+      4798 start  (in dyld) + 6992  [0x183f9fe00]
+        4793 main  (in profile_join) + 1756  [0x10239d4dc]
+        + 4793 columnar::SortOperator::next()  (in profile_join) + 36  [0x1023c0d74]
+        +   4793 columnar::SortOperator::compute()  (in profile_join) + 48  [0x1023c0604]
+        +     4793 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 104  [0x1023ba850]
+        +       4792 columnar::ProjectOperator::next()  (in profile_join) + 60  [0x1023bc508]
+        +       ! 4792 columnar::HashAggregateOperator::next()  (in profile_join) + 36  [0x1023bf20c]
+        +       !   3777 columnar::HashAggregateOperator::compute()  (in profile_join) + 48  [0x1023bc890]
+        +       !   : 2459 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 104  [0x1023ba850]
+        +       !   : | 983 columnar::HashJoinOperator::next()  (in profile_join) + 128  [0x1023bf7d0]
+        +       !   : | + 973 columnar::ScanOperator::next()  (in profile_join) + 548  [0x1023bb738]
+        +       !   : | + ! 512 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<5ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join) + 288  [0x1023c3af4]
+        +       !   : | + ! : 481 _platform_memmove  (in libsystem_platform.dylib) + 460,444,...  [0x18436752c,0x18436751c,...]
+        +       !   : | + ! : 31 DYLD-STUB$$memmove  (in profile_join) + 4  [0x1023c8604]
+        +       !   : | + ! 225 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<1ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join) + 92,80,...  [0x1023c36b8,0x1023c36ac,...]
+        +       !   : | + ! 131 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<5ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join) + 156,144,...  [0x1023c3a70,0x1023c3a64,...]
+        +       !   : | + ! 57 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<2ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join) + 96,80,...  [0x1023c375c,0x1023c374c,...]
+        +       !   : | + ! 23 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<5ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join) + 56  [0x1023c3a0c]
+        +       !   : | + ! : 11 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 264  [0x1023ae770]
+        +       !   : | + ! : | 11 __bzero  (in libsystem_platform.dylib) + 68,64  [0x184367074,0x184367070]
+        +       !   : | + ! : 9 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 208  [0x1023ae738]
+        +       !   : | + ! : | 9 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | + ! : |   7 _xzm_malloc_large_huge  (in libsystem_malloc.dylib) + 456  [0x18417a3c8]
+        +       !   : | + ! : |   + 7 xzm_segment_group_alloc_chunk  (in libsystem_malloc.dylib) + 504  [0x1841635c4]
+        +       !   : | + ! : |   +   7 _xzm_segment_group_find_and_allocate_chunk  (in libsystem_malloc.dylib) + 528  [0x184163c00]
+        +       !   : | + ! : |   +     3 _xzm_segment_group_span_mark_smaller  (in libsystem_malloc.dylib) + 432  [0x1841651d8]
+        +       !   : | + ! : |   +     ! 3 mach_vm_reclaim_update_kernel_accounting  (in libsystem_kernel.dylib) + 92  [0x18432d464]
+        +       !   : | + ! : |   +     !   3 mach_vm_reclaim_update_kernel_accounting_trap  (in libsystem_kernel.dylib) + 8  [0x184319cb8]
+        +       !   : | + ! : |   +     2 _xzm_segment_group_span_mark_smaller  (in libsystem_malloc.dylib) + 240  [0x184165118]
+        +       !   : | + ! : |   +     ! 2 _xzm_reclaim_mark_used_locked  (in libsystem_malloc.dylib) + 60  [0x184165a50]
+        +       !   : | + ! : |   +     !   2 mach_vm_reclaim_try_cancel  (in libsystem_kernel.dylib) + 260  [0x18432d2c8]
+        +       !   : | + ! : |   +     !     2 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18431a10c]
+        +       !   : | + ! : |   +     1 _xzm_segment_group_span_mark_smaller  (in libsystem_malloc.dylib) + 364  [0x184165194]
+        +       !   : | + ! : |   +     ! 1 xzm_reclaim_mark_free_locked  (in libsystem_malloc.dylib) + 116  [0x18416294c]
+        +       !   : | + ! : |   +     !   1 mach_vm_reclaim_try_enter  (in libsystem_kernel.dylib) + 296  [0x18432d14c]
+        +       !   : | + ! : |   +     !     1 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18431a10c]
+        +       !   : | + ! : |   +     1 _xzm_segment_group_span_mark_smaller  (in libsystem_malloc.dylib) + 164  [0x1841650cc]
+        +       !   : | + ! : |   1 _xzm_malloc_large_huge  (in libsystem_malloc.dylib) + 80  [0x18417a250]
+        +       !   : | + ! : |   1 malloc_type_malloc  (in libsystem_malloc.dylib) + 72  [0x18416e02c]
+        +       !   : | + ! : 1 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 288  [0x1023ae788]
+        +       !   : | + ! : | 1 std::__variant_detail::__assignment<std::__variant_detail::__traits<std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>>::__assign_alt[abi:nqe210106]<3ul, std::vector<std::basic_string<char>>, std::vector<std::basic_string<char>>>(std::__variant_detail::__alt<3ul, std::vector<std::basic_string<char>>>&, std::vector<std::basic_string<char>>&&)  (in profile_join) + 0  [0x1023b1ca8]
+        +       !   : | + ! : 1 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 780  [0x1023ae974]
+        +       !   : | + ! : | 1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | + ! : |   1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 276  [0x18417ffe8]
+        +       !   : | + ! : 1 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 264  [0x1023ae770]
+        +       !   : | + ! 18 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<1ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join) + 40  [0x1023c3684]
+        +       !   : | + ! : 13 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 404  [0x1023ae7fc]
+        +       !   : | + ! : | 13 _platform_memset  (in libsystem_platform.dylib) + 140  [0x18436711c]
+        +       !   : | + ! : 2 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 384  [0x1023ae7e8]
+        +       !   : | + ! : | 2 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | + ! : |   1 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 0  [0x18417a0d4]
+        +       !   : | + ! : |   1 _xzm_xzone_malloc_small_freelist  (in libsystem_malloc.dylib) + 116  [0x184180344]
+        +       !   : | + ! : 2 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 780  [0x1023ae974]
+        +       !   : | + ! : | 2 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | + ! : |   2 _xzm_xzone_malloc_freelist_outlined  (in libsystem_malloc.dylib) + 324  [0x18418177c]
+        +       !   : | + ! : |     1 _xzm_xzone_find_and_malloc_from_freelist_chunk  (in libsystem_malloc.dylib) + 336  [0x184182064]
+        +       !   : | + ! : |     + 1 _xzm_xzone_malloc_from_freelist_chunk  (in libsystem_malloc.dylib) + 300  [0x184181c44]
+        +       !   : | + ! : |     1 _xzm_xzone_find_and_malloc_from_freelist_chunk  (in libsystem_malloc.dylib) + 340  [0x184182068]
+        +       !   : | + ! : 1 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 0  [0x1023ae668]
+        +       !   : | + ! 7 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<2ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join) + 40  [0x1023c3724]
+        +       !   : | + !   4 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 132  [0x1023ae6ec]
+        +       !   : | + !   | 4 _platform_memset  (in libsystem_platform.dylib) + 140  [0x18436711c]
+        +       !   : | + !   2 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 780  [0x1023ae974]
+        +       !   : | + !   | 2 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | + !   |   2 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 284,364  [0x18417fff0,0x184180040]
+        +       !   : | + !   1 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 112  [0x1023ae6d8]
+        +       !   : | + !     1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | + !       1 malloc_type_malloc  (in libsystem_malloc.dylib) + 44  [0x18416e010]
+        +       !   : | + 8 columnar::ScanOperator::next()  (in profile_join) + 500,0,...  [0x1023bb708,0x1023bb514,...]
+        +       !   : | + 1 columnar::ScanOperator::next()  (in profile_join) + 388  [0x1023bb698]
+        +       !   : | + ! 1 std::vector<std::basic_string<char>>::__assign_with_size[abi:nqe210106]<std::basic_string<char>*, std::basic_string<char>*>(std::basic_string<char>*, std::basic_string<char>*, long)  (in profile_join) + 0  [0x1023c28bc]
+        +       !   : | + 1 columnar::ScanOperator::next()  (in profile_join) + 408  [0x1023bb6ac]
+        +       !   : | +   1 std::vector<columnar::ExecColumn>::reserve(unsigned long)  (in profile_join) + 88  [0x1023bbab0]
+        +       !   : | +     1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | +       1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 276  [0x18417ffe8]
+        +       !   : | 520 columnar::HashJoinOperator::next()  (in profile_join) + 292  [0x1023bf874]
+        +       !   : | + 276 columnar::(anonymous namespace)::stringify_key(columnar::ExecColumn const&, unsigned long)  (in profile_join) + 380  [0x1023be690]
+        +       !   : | + ! 115 std::to_string(long long)  (in libc++.1.dylib) + 172  [0x1842759c8]
+        +       !   : | + ! : 115 std::__itoa::__base_10_u32[abi:nqe210106](char*, unsigned int)  (in libc++.1.dylib) + 516,896,...  [0x184281c84,0x184281e00,...]
+        +       !   : | + ! 77 std::to_string(long long)  (in libc++.1.dylib) + 432  [0x184275acc]
+        +       !   : | + ! : 53 <deduplicated_symbol>  (in libc++.1.dylib) + 152  [0x184288760]
+        +       !   : | + ! : | 45 _platform_memmove  (in libsystem_platform.dylib) + 452,12,...  [0x184367524,0x18436736c,...]
+        +       !   : | + ! : | 8 DYLD-STUB$$memmove  (in libc++.1.dylib) + 8  [0x1842d27c0]
+        +       !   : | + ! : 24 <deduplicated_symbol>  (in libc++.1.dylib) + 16,40,...  [0x1842886d8,0x1842886f0,...]
+        +       !   : | + ! 55 std::to_string(long long)  (in libc++.1.dylib) + 164,156,...  [0x1842759c0,0x1842759b8,...]
+        +       !   : | + ! 22 <deduplicated_symbol>  (in libc++.1.dylib) + 168  [0x184288770]
+        +       !   : | + ! 7 DYLD-STUB$$std::to_string(long long)  (in profile_join) + 4,0  [0x1023c849c,0x1023c8498]
+        +       !   : | + 180 columnar::(anonymous namespace)::stringify_key(columnar::ExecColumn const&, unsigned long)  (in profile_join) + 404  [0x1023be6a8]
+        +       !   : | + ! 87 std::basic_string<char>::insert(unsigned long, char const*, unsigned long)  (in libc++.1.dylib) + 200  [0x18427364c]
+        +       !   : | + ! : 75 _platform_memmove  (in libsystem_platform.dylib) + 700,464,...  [0x18436761c,0x184367530,...]
+        +       !   : | + ! : 12 DYLD-STUB$$memmove  (in libc++.1.dylib) + 8  [0x1842d27c0]
+        +       !   : | + ! 44 std::basic_string<char>::insert(unsigned long, char const*, unsigned long)  (in libc++.1.dylib) + 160,196,...  [0x184273624,0x184273648,...]
+        +       !   : | + ! 43 std::basic_string<char>::insert(unsigned long, char const*, unsigned long)  (in libc++.1.dylib) + 216  [0x18427365c]
+        +       !   : | + ! : 28 _platform_memmove  (in libsystem_platform.dylib) + 0,428,...  [0x184367360,0x18436750c,...]
+        +       !   : | + ! : 15 DYLD-STUB$$memmove  (in libc++.1.dylib) + 8,12  [0x1842d27c0,0x1842d27c4]
+        +       !   : | + ! 6 DYLD-STUB$$std::basic_string<char>::insert(unsigned long, char const*, unsigned long)  (in profile_join) + 4  [0x1023c83a0]
+        +       !   : | + 33 columnar::(anonymous namespace)::stringify_key(columnar::ExecColumn const&, unsigned long)  (in profile_join) + 380,28,...  [0x1023be690,0x1023be530,...]
+        +       !   : | + 23 std::basic_string<char>::insert(unsigned long, char const*, unsigned long)  (in libc++.1.dylib) + 264,256  [0x18427368c,0x184273684]
+        +       !   : | + 8 std::to_string(long long)  (in libc++.1.dylib) + 468,460  [0x184275af0,0x184275ae8]
+        +       !   : | 402 columnar::HashJoinOperator::next()  (in profile_join) + 564,500,...  [0x1023bf984,0x1023bf944,...]
+        +       !   : | 270 columnar::HashJoinOperator::next()  (in profile_join) + 1716  [0x1023bfe04]
+        +       !   : | + 230 columnar::(anonymous namespace)::gather_with_nulls(columnar::ExecColumn const&, std::vector<unsigned int> const&)  (in profile_join) + 144,116,...  [0x1023bc2f8,0x1023bc2dc,...]
+        +       !   : | + 40 columnar::(anonymous namespace)::gather_with_nulls(columnar::ExecColumn const&, std::vector<unsigned int> const&)  (in profile_join) + 56  [0x1023bc2a0]
+        +       !   : | +   12 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 264  [0x1023ae770]
+        +       !   : | +   : 12 __bzero  (in libsystem_platform.dylib) + 68,64  [0x184367074,0x184367070]
+        +       !   : | +   10 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 404  [0x1023ae7fc]
+        +       !   : | +   : 10 _platform_memset  (in libsystem_platform.dylib) + 140  [0x18436711c]
+        +       !   : | +   7 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 208  [0x1023ae738]
+        +       !   : | +   : 7 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | +   :   7 _xzm_malloc_large_huge  (in libsystem_malloc.dylib) + 456  [0x18417a3c8]
+        +       !   : | +   :     7 xzm_segment_group_alloc_chunk  (in libsystem_malloc.dylib) + 504  [0x1841635c4]
+        +       !   : | +   :       6 _xzm_segment_group_find_and_allocate_chunk  (in libsystem_malloc.dylib) + 528  [0x184163c00]
+        +       !   : | +   :       | 2 _xzm_segment_group_span_mark_smaller  (in libsystem_malloc.dylib) + 240  [0x184165118]
+        +       !   : | +   :       | + 2 _xzm_reclaim_mark_used_locked  (in libsystem_malloc.dylib) + 60  [0x184165a50]
+        +       !   : | +   :       | +   2 mach_vm_reclaim_try_cancel  (in libsystem_kernel.dylib) + 260  [0x18432d2c8]
+        +       !   : | +   :       | +     2 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18431a10c]
+        +       !   : | +   :       | 2 _xzm_segment_group_span_mark_smaller  (in libsystem_malloc.dylib) + 432  [0x1841651d8]
+        +       !   : | +   :       | + 2 mach_vm_reclaim_update_kernel_accounting  (in libsystem_kernel.dylib) + 92  [0x18432d464]
+        +       !   : | +   :       | +   2 mach_vm_reclaim_update_kernel_accounting_trap  (in libsystem_kernel.dylib) + 8  [0x184319cb8]
+        +       !   : | +   :       | 2 _xzm_segment_group_span_mark_smaller  (in libsystem_malloc.dylib) + 144,196  [0x1841650b8,0x1841650ec]
+        +       !   : | +   :       1 _xzm_segment_group_find_and_allocate_chunk  (in libsystem_malloc.dylib) + 324  [0x184163b34]
+        +       !   : | +   3 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 132  [0x1023ae6ec]
+        +       !   : | +   : 3 _platform_memset  (in libsystem_platform.dylib) + 140  [0x18436711c]
+        +       !   : | +   3 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 780  [0x1023ae974]
+        +       !   : | +   : 3 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | +   :   3 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 276,364,...  [0x18417ffe8,0x184180040,...]
+        +       !   : | +   2 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 384  [0x1023ae7e8]
+        +       !   : | +   : 2 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | +   :   1 _xzm_xzone_malloc_freelist_outlined  (in libsystem_malloc.dylib) + 260  [0x18418173c]
+        +       !   : | +   :   | 1 _malloc_ulock_self_owner_value  (in libsystem_malloc.dylib) + 0  [0x184181f04]
+        +       !   : | +   :   1 _xzm_xzone_malloc_small_freelist  (in libsystem_malloc.dylib) + 248  [0x1841803c8]
+        +       !   : | +   2 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 808  [0x1023ae990]
+        +       !   : | +   : 2 _platform_memset  (in libsystem_platform.dylib) + 140  [0x18436711c]
+        +       !   : | +   1 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 288  [0x1023ae788]
+        +       !   : | +     1 std::__variant_detail::__assignment<std::__variant_detail::__traits<std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>>::__assign_alt[abi:nqe210106]<3ul, std::vector<std::basic_string<char>>, std::vector<std::basic_string<char>>>(std::__variant_detail::__alt<3ul, std::vector<std::basic_string<char>>>&, std::vector<std::basic_string<char>>&&)  (in profile_join) + 144  [0x1023b1d38]
+        +       !   : | 165 columnar::HashJoinOperator::next()  (in profile_join) + 2404  [0x1023c00b4]
+        +       !   : | + 149 columnar::(anonymous namespace)::gather_with_nulls(columnar::ExecColumn const&, std::vector<unsigned int> const&)  (in profile_join) + 96,144,...  [0x1023bc2c8,0x1023bc2f8,...]
+        +       !   : | + 16 columnar::(anonymous namespace)::gather_with_nulls(columnar::ExecColumn const&, std::vector<unsigned int> const&)  (in profile_join) + 56  [0x1023bc2a0]
+        +       !   : | +   12 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 264  [0x1023ae770]
+        +       !   : | +   : 12 __bzero  (in libsystem_platform.dylib) + 68  [0x184367074]
+        +       !   : | +   2 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 208  [0x1023ae738]
+        +       !   : | +   : 2 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | +   :   2 _xzm_malloc_large_huge  (in libsystem_malloc.dylib) + 456  [0x18417a3c8]
+        +       !   : | +   :     2 xzm_segment_group_alloc_chunk  (in libsystem_malloc.dylib) + 504  [0x1841635c4]
+        +       !   : | +   :       1 _xzm_segment_group_find_and_allocate_chunk  (in libsystem_malloc.dylib) + 528  [0x184163c00]
+        +       !   : | +   :       | 1 _xzm_segment_group_span_mark_smaller  (in libsystem_malloc.dylib) + 240  [0x184165118]
+        +       !   : | +   :       |   1 _xzm_reclaim_mark_used_locked  (in libsystem_malloc.dylib) + 60  [0x184165a50]
+        +       !   : | +   :       |     1 mach_vm_reclaim_try_cancel  (in libsystem_kernel.dylib) + 260  [0x18432d2c8]
+        +       !   : | +   :       |       1 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18431a10c]
+        +       !   : | +   :       1 _xzm_segment_group_find_and_allocate_chunk  (in libsystem_malloc.dylib) + 324  [0x184163b34]
+        +       !   : | +   2 columnar::ExecColumn::make(columnar::ExecType, unsigned long)  (in profile_join) + 404  [0x1023ae7fc]
+        +       !   : | +     2 _platform_memset  (in libsystem_platform.dylib) + 140  [0x18436711c]
+        +       !   : | 41 columnar::HashJoinOperator::next()  (in profile_join) + 556  [0x1023bf97c]
+        +       !   : | + 30 _platform_memcmp  (in libsystem_platform.dylib) + 140,260,...  [0x184364f9c,0x184365014,...]
+        +       !   : | + 11 DYLD-STUB$$memcmp  (in profile_join) + 4  [0x1023c85ec]
+        +       !   : | 25 columnar::HashJoinOperator::next()  (in profile_join) + 352  [0x1023bf8b0]
+        +       !   : | + 25 std::__murmur2_or_cityhash<unsigned long, 64ul>::operator()[abi:nqe210106](void const*, unsigned long) const  (in profile_join) + 16,0,...  [0x10239e810,0x10239e800,...]
+        +       !   : | 23 columnar::HashJoinOperator::next()  (in profile_join) + 3128  [0x1023c0388]
+        +       !   : | + 22 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<3ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__dtor<std::__variant_detail::__traits<std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>, (std::__variant_detail::_Trait)1>::__destroy[abi:nqe210106]()::'lambda'(auto&)&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&>(auto, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&)  (in profile_join) + 72,64,...  [0x10239ef2c,0x10239ef24,...]
+        +       !   : | + 1 xzm_segment_group_free_chunk  (in libsystem_malloc.dylib) + 636  [0x18416438c]
+        +       !   : | +   1 _xzm_segment_group_segment_span_free_coalesce  (in libsystem_malloc.dylib) + 328  [0x1841649e4]
+        +       !   : | 6 columnar::(anonymous namespace)::stringify_key(columnar::ExecColumn const&, unsigned long)  (in profile_join) + 160  [0x1023be5b4]
+        +       !   : | 5 columnar::HashJoinOperator::next()  (in profile_join) + 936  [0x1023bfaf8]
+        +       !   : | + 2 _xzm_free  (in libsystem_malloc.dylib) + 352  [0x18417b1cc]
+        +       !   : | + ! 2 _platform_memset  (in libsystem_platform.dylib) + 160  [0x184367130]
+        +       !   : | + 2 _xzm_free  (in libsystem_malloc.dylib) + 1048  [0x18417b484]
+        +       !   : | + ! 2 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18431a10c]
+        +       !   : | + 1 _xzm_free  (in libsystem_malloc.dylib) + 232  [0x18417b154]
+        +       !   : | 4 columnar::HashJoinOperator::next()  (in profile_join) + 56  [0x1023bf788]
+        +       !   : | + 3 columnar::HashJoinOperator::build_right_side()  (in profile_join) + 388  [0x1023bf4f4]
+        +       !   : | + ! 2 std::__hash_table<std::__hash_value_type<std::basic_string<char>, std::vector<unsigned int>>>::__emplace_unique_key_args<std::basic_string<char>, std::piecewise_construct_t const&, std::tuple<std::basic_string<char>&&>, std::tuple<>>(std::basic_string<char> const&, std::piecewise_construct_t const&, std::tuple<std::basic_string<char>&&>&&, std::tuple<>&&)  (in profile_join) + 424  [0x1023c5414]
+        +       !   : | + ! : 2 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | + ! :   2 malloc_type_malloc  (in libsystem_malloc.dylib) + 16,72  [0x18416dff4,0x18416e02c]
+        +       !   : | + ! 1 std::__hash_table<std::__hash_value_type<std::basic_string<char>, std::vector<unsigned int>>>::__emplace_unique_key_args<std::basic_string<char>, std::piecewise_construct_t const&, std::tuple<std::basic_string<char>&&>, std::tuple<>>(std::basic_string<char> const&, std::piecewise_construct_t const&, std::tuple<std::basic_string<char>&&>&&, std::tuple<>&&)  (in profile_join) + 132  [0x1023c52f0]
+        +       !   : | + 1 columnar::HashJoinOperator::build_right_side()  (in profile_join) + 48  [0x1023bf3a0]
+        +       !   : | +   1 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 104  [0x1023ba850]
+        +       !   : | +     1 columnar::ScanOperator::next()  (in profile_join) + 548  [0x1023bb738]
+        +       !   : | +       1 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<5ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join) + 288  [0x1023c3af4]
+        +       !   : | +         1 _platform_memmove  (in libsystem_platform.dylib) + 460  [0x18436752c]
+        +       !   : | 4 columnar::HashJoinOperator::next()  (in profile_join) + 744  [0x1023bfa38]
+        +       !   : | + 4 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | +   1 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 0  [0x18417a0d4]
+        +       !   : | +   1 _xzm_xzone_malloc  (in libsystem_malloc.dylib) + 76  [0x18417a90c]
+        +       !   : | +   1 _xzm_xzone_malloc_freelist_outlined  (in libsystem_malloc.dylib) + 540  [0x184181854]
+        +       !   : | +   1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 24  [0x18417feec]
+        +       !   : | 3 columnar::HashJoinOperator::next()  (in profile_join) + 920  [0x1023bfae8]
+        +       !   : | + 3 _platform_memmove  (in libsystem_platform.dylib) + 180,168  [0x184367414,0x184367408]
+        +       !   : | 2 columnar::HashJoinOperator::next()  (in profile_join) + 780  [0x1023bfa5c]
+        +       !   : | + 2 _platform_memmove  (in libsystem_platform.dylib) + 180  [0x184367414]
+        +       !   : | 2 columnar::HashJoinOperator::next()  (in profile_join) + 796  [0x1023bfa6c]
+        +       !   : | + 1 _xzm_free  (in libsystem_malloc.dylib) + 352  [0x18417b1cc]
+        +       !   : | + ! 1 __bzero  (in libsystem_platform.dylib) + 24  [0x184367048]
+        +       !   : | + 1 _xzm_free  (in libsystem_malloc.dylib) + 1460  [0x18417b620]
+        +       !   : | 1 columnar::HashJoinOperator::next()  (in profile_join) + 888  [0x1023bfac8]
+        +       !   : | + 1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | +   1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 764  [0x1841801d0]
+        +       !   : | 1 columnar::HashJoinOperator::next()  (in profile_join) + 1504  [0x1023bfd30]
+        +       !   : | + 1 std::vector<std::basic_string<char>>::__assign_with_size[abi:nqe210106]<std::basic_string<char>*, std::basic_string<char>*>(std::basic_string<char>*, std::basic_string<char>*, long)  (in profile_join) + 520  [0x1023c2ac4]
+        +       !   : | +   1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : | +     1 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 212  [0x18417a1a8]
+        +       !   : | 1 columnar::HashJoinOperator::next()  (in profile_join) + 1648  [0x1023bfdc0]
+        +       !   : | + 1 _xzm_free_outlined  (in libsystem_malloc.dylib) + 480  [0x1841835f4]
+        +       !   : | 1 columnar::HashJoinOperator::next()  (in profile_join) + 3100  [0x1023c036c]
+        +       !   : |   1 _xzm_free  (in libsystem_malloc.dylib) + 48  [0x18417b09c]
+        +       !   : 902 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 1176  [0x1023bac80]
+        +       !   : | 482 std::vector<std::basic_string<char>>::__insert_with_size[abi:nqe210106]<std::__wrap_iter<std::basic_string<char> const*>, std::__wrap_iter<std::basic_string<char> const*>>(std::__wrap_iter<std::basic_string<char> const*>, std::__wrap_iter<std::basic_string<char> const*>, std::__wrap_iter<std::basic_string<char> const*>, long)  (in profile_join) + 284,296,...  [0x1023c3130,0x1023c313c,...]
+        +       !   : | 420 std::vector<std::basic_string<char>>::__insert_with_size[abi:nqe210106]<std::__wrap_iter<std::basic_string<char> const*>, std::__wrap_iter<std::basic_string<char> const*>>(std::__wrap_iter<std::basic_string<char> const*>, std::__wrap_iter<std::basic_string<char> const*>, std::__wrap_iter<std::basic_string<char> const*>, long)  (in profile_join) + 768  [0x1023c3314]
+        +       !   : |   420 _platform_memmove  (in libsystem_platform.dylib) + 88,96,...  [0x1843673b8,0x1843673c0,...]
+        +       !   : 198 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 1660,776,...  [0x1023bae64,0x1023baaf0,...]
+        +       !   : 126 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 1904  [0x1023baf58]
+        +       !   : | 126 _platform_memmove  (in libsystem_platform.dylib) + 88,96  [0x1843673b8,0x1843673c0]
+        +       !   : 62 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 2124  [0x1023bb034]
+        +       !   : | 54 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<3ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__dtor<std::__variant_detail::__traits<std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>, (std::__variant_detail::_Trait)1>::__destroy[abi:nqe210106]()::'lambda'(auto&)&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&>(auto, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&)  (in profile_join) + 64,72  [0x10239ef24,0x10239ef2c]
+        +       !   : | 4 xzm_segment_group_free_chunk  (in libsystem_malloc.dylib) + 636  [0x18416438c]
+        +       !   : | + 4 _xzm_segment_group_segment_span_free_coalesce  (in libsystem_malloc.dylib) + 256  [0x18416499c]
+        +       !   : | +   3 _xzm_segment_group_span_mark_used  (in libsystem_malloc.dylib) + 148  [0x184166364]
+        +       !   : | +   ! 3 _xzm_reclaim_mark_used  (in libsystem_malloc.dylib) + 124  [0x184162f7c]
+        +       !   : | +   !   2 _xzm_reclaim_mark_used_locked  (in libsystem_malloc.dylib) + 60  [0x184165a50]
+        +       !   : | +   !   : 1 DYLD-STUB$$mach_vm_reclaim_try_cancel  (in libsystem_malloc.dylib) + 8  [0x184192c34]
+        +       !   : | +   !   : 1 mach_vm_reclaim_try_cancel  (in libsystem_kernel.dylib) + 260  [0x18432d2c8]
+        +       !   : | +   !   :   1 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18431a10c]
+        +       !   : | +   !   1 _xzm_reclaim_mark_used_locked  (in libsystem_malloc.dylib) + 36  [0x184165a38]
+        +       !   : | +   1 _xzm_segment_group_span_mark_used  (in libsystem_malloc.dylib) + 112  [0x184166340]
+        +       !   : | 2 xzm_segment_group_free_chunk  (in libsystem_malloc.dylib) + 860  [0x18416446c]
+        +       !   : | + 2 _xzm_segment_group_span_mark_free  (in libsystem_malloc.dylib) + 136  [0x184164bcc]
+        +       !   : | +   2 _xzm_reclaim_mark_free  (in libsystem_malloc.dylib) + 112  [0x184162dc0]
+        +       !   : | +     2 xzm_reclaim_mark_free_locked  (in libsystem_malloc.dylib) + 116  [0x18416294c]
+        +       !   : | +       2 mach_vm_reclaim_try_enter  (in libsystem_kernel.dylib) + 296  [0x18432d14c]
+        +       !   : | +         2 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18431a10c]
+        +       !   : | 1 _xzm_free_outlined  (in libsystem_malloc.dylib) + 828  [0x184183750]
+        +       !   : | 1 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<1ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__dtor<std::__variant_detail::__traits<std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>, (std::__variant_detail::_Trait)1>::__destroy[abi:nqe210106]()::'lambda'(auto&)&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&>(auto, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&)  (in profile_join) + 0  [0x10239eebc]
+        +       !   : 28 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 900  [0x1023bab6c]
+        +       !   : | 28 _platform_memmove  (in libsystem_platform.dylib) + 88,96  [0x1843673b8,0x1843673c0]
+        +       !   : 1 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 1092  [0x1023bac2c]
+        +       !   : | 1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        +       !   : |   1 _xzm_malloc_large_huge  (in libsystem_malloc.dylib) + 456  [0x18417a3c8]
+        +       !   : |     1 xzm_segment_group_alloc_chunk  (in libsystem_malloc.dylib) + 292  [0x1841634f0]
+        +       !   : |       1 _xzm_segment_group_cache_mark_used  (in libsystem_malloc.dylib) + 60  [0x184165f2c]
+        +       !   : |         1 _xzm_reclaim_mark_used  (in libsystem_malloc.dylib) + 0  [0x184162f00]
+        +       !   : 1 columnar::materialize_all(columnar::Operator&)  (in profile_join) + 2140  [0x1023bb044]
+        +       !   :   1 _xzm_free  (in libsystem_malloc.dylib) + 1048  [0x18417b484]
+        +       !   :     1 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18431a10c]
+        +       !   294 columnar::HashAggregateOperator::compute()  (in profile_join) + 920  [0x1023bcbf8]
+        +       !   : 240 columnar::(anonymous namespace)::stringify_key(columnar::ExecColumn const&, unsigned long)  (in profile_join) + 588  [0x1023be760]
+        +       !   : | 231 _platform_memmove  (in libsystem_platform.dylib) + 460,444,...  [0x18436752c,0x18436751c,...]
+        +       !   : | 9 DYLD-STUB$$memmove  (in profile_join) + 4  [0x1023c8604]
+        +       !   : 54 columnar::(anonymous namespace)::stringify_key(columnar::ExecColumn const&, unsigned long)  (in profile_join) + 564,244,...  [0x1023be748,0x1023be608,...]
+        +       !   267 columnar::HashAggregateOperator::compute()  (in profile_join) + 1668  [0x1023bcee4]
+        +       !   : 201 std::__hash_table<std::__hash_value_type<std::basic_string<char>, unsigned long>>::find<std::basic_string<char>>(std::basic_string<char> const&)  (in profile_join) + 288,224,...  [0x1023c4dc0,0x1023c4d80,...]
+        +       !   : 47 std::__hash_table<std::__hash_value_type<std::basic_string<char>, unsigned long>>::find<std::basic_string<char>>(std::basic_string<char> const&)  (in profile_join) + 280  [0x1023c4db8]
+        +       !   : | 34 _platform_memcmp  (in libsystem_platform.dylib) + 140,260,...  [0x184364f9c,0x184365014,...]
+        +       !   : | 13 DYLD-STUB$$memcmp  (in profile_join) + 4  [0x1023c85ec]
+        +       !   : 19 std::__hash_table<std::__hash_value_type<std::basic_string<char>, unsigned long>>::find<std::basic_string<char>>(std::basic_string<char> const&)  (in profile_join) + 84  [0x1023c4cf4]
+        +       !   :   19 std::__murmur2_or_cityhash<unsigned long, 64ul>::operator()[abi:nqe210106](void const*, unsigned long) const  (in profile_join) + 8,936,...  [0x10239e808,0x10239eba8,...]
+        +       !   211 columnar::HashAggregateOperator::compute()  (in profile_join) + 3152,3112,...  [0x1023bd4b0,0x1023bd488,...]
+        +       !   79 columnar::HashAggregateOperator::compute()  (in profile_join) + 6604  [0x1023be22c]
+        +       !   : 79 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<3ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__dtor<std::__variant_detail::__traits<std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>, (std::__variant_detail::_Trait)1>::__destroy[abi:nqe210106]()::'lambda'(auto&)&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&>(auto, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&)  (in profile_join) + 72,64,...  [0x10239ef2c,0x10239ef24,...]
+        +       !   65 columnar::HashAggregateOperator::compute()  (in profile_join) + 180  [0x1023bc914]
+        +       !   : 60 columnar::ColumnRefExpr::evaluate(columnar::ExecBatch const&, std::vector<unsigned int> const*) const  (in profile_join) + 1136  [0x1023af130]
+        +       !   : | 60 std::vector<std::basic_string<char>>::__init_with_size[abi:nqe210106]<std::basic_string<char>*, std::basic_string<char>*>(std::basic_string<char>*, std::basic_string<char>*, unsigned long)  (in profile_join) + 180,156,...  [0x1023b21f4,0x1023b21dc,...]
+        +       !   : 5 columnar::ColumnRefExpr::evaluate(columnar::ExecBatch const&, std::vector<unsigned int> const*) const  (in profile_join) + 100  [0x1023aed24]
+        +       !   :   5 columnar::(anonymous namespace)::gather<unsigned char>(std::vector<unsigned char> const&, std::vector<unsigned int> const*)  (in profile_join) + 172  [0x1023af4cc]
+        +       !   :     5 _platform_memmove  (in libsystem_platform.dylib) + 96,88  [0x1843673c0,0x1843673b8]
+        +       !   48 columnar::HashAggregateOperator::compute()  (in profile_join) + 1464  [0x1023bce18]
+        +       !   : 44 _platform_memmove  (in libsystem_platform.dylib) + 452,460,...  [0x184367524,0x18436752c,...]
+        +       !   : 4 DYLD-STUB$$memmove  (in profile_join) + 4  [0x1023c8604]
+        +       !   17 std::__hash_table<std::__hash_value_type<std::basic_string<char>, unsigned long>>::find<std::basic_string<char>>(std::basic_string<char> const&)  (in profile_join) + 428,424  [0x1023c4e4c,0x1023c4e48]
+        +       !   13 columnar::(anonymous namespace)::stringify_key(columnar::ExecColumn const&, unsigned long)  (in profile_join) + 604  [0x1023be770]
+        +       !   11 columnar::HashAggregateOperator::compute()  (in profile_join) + 6488  [0x1023be1b8]
+        +       !   : 11 decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<3ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__dtor<std::__variant_detail::__traits<std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>, (std::__variant_detail::_Trait)1>::__destroy[abi:nqe210106]()::'lambda'(auto&)&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&>(auto, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&)  (in profile_join) + 64,72  [0x10239ef24,0x10239ef2c]
+        +       !   10 columnar::HashAggregateOperator::compute()  (in profile_join) + 492  [0x1023bca4c]
+        +       !     8 columnar::ColumnRefExpr::evaluate(columnar::ExecBatch const&, std::vector<unsigned int> const*) const  (in profile_join) + 1080  [0x1023af0f8]
+        +       !     | 8 _platform_memmove  (in libsystem_platform.dylib) + 88  [0x1843673b8]
+        +       !     2 columnar::ColumnRefExpr::evaluate(columnar::ExecBatch const&, std::vector<unsigned int> const*) const  (in profile_join) + 100  [0x1023aed24]
+        +       !       2 columnar::(anonymous namespace)::gather<unsigned char>(std::vector<unsigned char> const&, std::vector<unsigned int> const*)  (in profile_join) + 172  [0x1023af4cc]
+        +       !         2 _platform_memmove  (in libsystem_platform.dylib) + 76,88  [0x1843673ac,0x1843673b8]
+        +       1 columnar::ProjectOperator::next()  (in profile_join) + 132  [0x1023bc550]
+        3 main  (in profile_join) + 1968  [0x10239d5b0]
+        + 3 columnar::SortOperator::~SortOperator()  (in profile_join) + 108  [0x1023c2824]
+        +   3 columnar::ProjectOperator::~ProjectOperator()  (in profile_join) + 128  [0x1023c2578]
+        +     3 columnar::HashAggregateOperator::~HashAggregateOperator()  (in profile_join) + 184  [0x1023c2710]
+        +       3 columnar::HashJoinOperator::~HashJoinOperator()  (in profile_join) + 12  [0x1023c2734]
+        +         2 columnar::HashJoinOperator::~HashJoinOperator()  (in profile_join) + 128  [0x1023c4c1c]
+        +         ! 2 _xzm_free  (in libsystem_malloc.dylib) + 636  [0x18417b2e8]
+        +         1 columnar::HashJoinOperator::~HashJoinOperator()  (in profile_join) + 100  [0x1023c4c00]
+        +           1 free  (in libsystem_malloc.dylib) + 0  [0x1841516b8]
+        1 main  (in profile_join) + 1556  [0x10239d414]
+        + 1 columnar::parse_query(std::basic_string_view<char>)  (in profile_join) + 344  [0x1023aafc8]
+        +   1 columnar::(anonymous namespace)::Parser::parse_select_item()  (in profile_join) + 40  [0x1023ac708]
+        +     1 columnar::(anonymous namespace)::Parser::parse_expr()  (in profile_join) + 0  [0x1023ac504]
+        1 main  (in profile_join) + 1716  [0x10239d4b4]
+          1 columnar::build_physical_plan(columnar::LogicalPlan const&, std::unordered_map<std::basic_string<char>, columnar::Table> const&, columnar::ScanStats*, std::deque<std::vector<std::unique_ptr<columnar::Expression>>>&)  (in profile_join) + 1004  [0x1023c16e8]
+            1 columnar::build_physical_plan(columnar::LogicalPlan const&, std::unordered_map<std::basic_string<char>, columnar::Table> const&, columnar::ScanStats*, std::deque<std::vector<std::unique_ptr<columnar::Expression>>>&)  (in profile_join) + 568  [0x1023c1534]
+              1 columnar::build_physical_plan(columnar::LogicalPlan const&, std::unordered_map<std::basic_string<char>, columnar::Table> const&, columnar::ScanStats*, std::deque<std::vector<std::unique_ptr<columnar::Expression>>>&)  (in profile_join) + 920  [0x1023c1694]
+                1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+                  1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 156  [0x18417ff70]
+
+Total number in stack (recursive counted multiple, when >=5):
+        17       operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x1843147e8]
+        15       _platform_memmove  (in libsystem_platform.dylib) + 0  [0x184367360]
+        8       mach_absolute_time  (in libsystem_kernel.dylib) + 0  [0x18431a0a0]
+        7       _platform_memset  (in libsystem_platform.dylib) + 0  [0x184367090]
+        7       _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 0  [0x18417fed4]
+
+Sort by top of stack, same collapsed (when >= 5):
+        _platform_memmove  (in libsystem_platform.dylib)        1499
+        std::vector<std::basic_string<char>>::__insert_with_size[abi:nqe210106]<std::__wrap_iter<std::basic_string<char> const*>, std::__wrap_iter<std::basic_string<char> const*>>(std::__wrap_iter<std::basic_string<char> const*>, std::__wrap_iter<std::basic_string<char> const*>, std::__wrap_iter<std::basic_string<char> const*>, long)  (in profile_join)        482
+        columnar::HashJoinOperator::next()  (in profile_join)        402
+        columnar::(anonymous namespace)::gather_with_nulls(columnar::ExecColumn const&, std::vector<unsigned int> const&)  (in profile_join)        379
+        decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<1ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join)        225
+        std::__hash_table<std::__hash_value_type<std::basic_string<char>, unsigned long>>::find<std::basic_string<char>>(std::basic_string<char> const&)  (in profile_join)        218
+        columnar::HashAggregateOperator::compute()  (in profile_join)        211
+        columnar::materialize_all(columnar::Operator&)  (in profile_join)        198
+        decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<3ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__dtor<std::__variant_detail::__traits<std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>, (std::__variant_detail::_Trait)1>::__destroy[abi:nqe210106]()::'lambda'(auto&)&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&>(auto, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, std::vector<long long>, std::vector<double>, std::vector<unsigned char>, std::vector<std::basic_string<char>>>&)  (in profile_join)        166
+        decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<5ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join)        131
+        std::__itoa::__base_10_u32[abi:nqe210106](char*, unsigned int)  (in libc++.1.dylib)        115
+        columnar::(anonymous namespace)::stringify_key(columnar::ExecColumn const&, unsigned long)  (in profile_join)        106
+        std::basic_string<char>::insert(unsigned long, char const*, unsigned long)  (in libc++.1.dylib)        67
+        _platform_memcmp  (in libsystem_platform.dylib)        64
+        std::to_string(long long)  (in libc++.1.dylib)        63
+        std::vector<std::basic_string<char>>::__init_with_size[abi:nqe210106]<std::basic_string<char>*, std::basic_string<char>*>(std::basic_string<char>*, std::basic_string<char>*, unsigned long)  (in profile_join)        60
+        decltype(auto) std::__variant_detail::__visitation::__base::__dispatcher<2ul>::__dispatch[abi:nqe210106]<std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&>(std::__variant_detail::__visitation::__variant::__value_visitor<columnar::decode_chunk(std::variant<columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)::$_0>&&, std::__variant_detail::__base<(std::__variant_detail::_Trait)1, columnar::PlainColumnChunk<int>, columnar::PlainColumnChunk<long long>, columnar::PlainColumnChunk<double>, columnar::BoolColumnChunk, columnar::VarcharColumnChunk, columnar::DictionaryColumnChunk, columnar::DictionaryRleColumnChunk> const&)  (in profile_join)        57
+        <deduplicated_symbol>  (in libc++.1.dylib)        46
+        DYLD-STUB$$memmove  (in profile_join)        44
+        std::__murmur2_or_cityhash<unsigned long, 64ul>::operator()[abi:nqe210106](void const*, unsigned long) const  (in profile_join)        44
+        __bzero  (in libsystem_platform.dylib)        36
+        _platform_memset  (in libsystem_platform.dylib)        36
+        DYLD-STUB$$memmove  (in libc++.1.dylib)        35
+        DYLD-STUB$$memcmp  (in profile_join)        24
+        mach_absolute_time  (in libsystem_kernel.dylib)        12
+        _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib)        10
+        columnar::ScanOperator::next()  (in profile_join)        8
+        DYLD-STUB$$std::to_string(long long)  (in profile_join)        7
+        DYLD-STUB$$std::basic_string<char>::insert(unsigned long, char const*, unsigned long)  (in profile_join)        6
+        _xzm_free  (in libsystem_malloc.dylib)        5
+        mach_vm_reclaim_update_kernel_accounting_trap  (in libsystem_kernel.dylib)        5
+
+Binary Images:
+       0x10239c000 -        0x1023cc42f +profile_join (0) <17C5EA0A-E822-330D-B5B5-8AEC9AA27424> /Users/*/profile_join
+       0x183ef8000 -        0x183f4ab4b  libobjc.A.dylib (951.7) <FF1D8AE4-ABEF-35F1-A30A-1183B9CB414F> /usr/lib/libobjc.A.dylib
+       0x183f4b000 -        0x183f7fd07  libdyld.dylib (1378) <B147D877-D0C2-388F-B38D-D3132E39905F> /usr/lib/system/libdyld.dylib
+       0x183f80000 -        0x184026217  dyld (1.0.0 - 1378) <F924BDD3-4365-3466-9580-8B1B3FA8F857> /usr/lib/dyld
+       0x184027000 -        0x18402a228  libsystem_blocks.dylib (96) <CC947089-488D-316B-A9C7-46DEC0F73145> /usr/lib/system/libsystem_blocks.dylib
+       0x18402b000 -        0x18407f55f  libxpc.dylib (3102.120.13) <C40FCAE8-7A17-3D82-87CB-3DA4802ADEF1> /usr/lib/system/libxpc.dylib
+       0x184080000 -        0x1840a09ff  libsystem_trace.dylib (1861.120.4) <D0FABAB3-5AE7-3F10-8C62-60CBF5D70850> /usr/lib/system/libsystem_trace.dylib
+       0x1840a1000 -        0x18414f5f7  libcorecrypto.dylib (1922.121.1) <A01A158D-6FE7-3B1C-A2C4-6BCB90D7314A> /usr/lib/system/libcorecrypto.dylib
+       0x184150000 -        0x1841a01d7  libsystem_malloc.dylib (812.100.31) <5FAE4807-4D2B-3A95-A63A-DD96D3DA11B4> /usr/lib/system/libsystem_malloc.dylib
+       0x1841a1000 -        0x1841e823f  libdispatch.dylib (1542.100.32) <F071EFE4-299F-3089-ACC4-0025B8FFB52A> /usr/lib/system/libdispatch.dylib
+       0x1841e9000 -        0x1841ebffb  libsystem_featureflags.dylib (103) <71FCFFBD-85F8-3365-AFE0-BECEA4369122> /usr/lib/system/libsystem_featureflags.dylib
+       0x1841ec000 -        0x18426cd9f  libsystem_c.dylib (1752.120.2) <694B7881-1BF3-3D0F-8F19-B50AE4E8EF8A> /usr/lib/system/libsystem_c.dylib
+       0x18426d000 -        0x1842fdae7  libc++.1.dylib (2100.43) <5013C0F8-84A9-3B56-9FEB-C353816A750F> /usr/lib/libc++.1.dylib
+       0x1842fe000 -        0x18431875f  libc++abi.dylib (2100.43) <E482D257-E5A0-3816-BD97-7B39342958DA> /usr/lib/libc++abi.dylib
+       0x184319000 -        0x1843562af  libsystem_kernel.dylib (12377.121.10) <FCA53B98-3D6A-38B2-A0EC-DF0F7E05F171> /usr/lib/system/libsystem_kernel.dylib
+       0x184357000 -        0x184363b3b  libsystem_pthread.dylib (539.100.4) <4F33683C-18C8-39A1-800B-2E3BD43BCC13> /usr/lib/system/libsystem_pthread.dylib
+       0x184364000 -        0x18436c963  libsystem_platform.dylib (375.120.2) <160FD864-8D15-36FC-9E97-9725388CFAFE> /usr/lib/system/libsystem_platform.dylib
+       0x18436d000 -        0x18439c6eb  libsystem_info.dylib (600) <3D62F2D9-F516-31BF-83C7-E203D872300B> /usr/lib/system/libsystem_info.dylib
+       0x188334000 -        0x18833de5f  libsystem_darwin.dylib (1752.120.2) <8858F025-745A-388E-9544-080781CC9A69> /usr/lib/system/libsystem_darwin.dylib
+       0x18879f000 -        0x1887b11b6  libsystem_notify.dylib (348.120.4) <64D76451-1E0C-369B-A631-54DA3140E083> /usr/lib/system/libsystem_notify.dylib
+       0x18aa6c000 -        0x18aa86f7b  libsystem_networkextension.dylib (2226.121.1) <0331EE20-A1FB-3C0D-990A-F65939CFF505> /usr/lib/system/libsystem_networkextension.dylib
+       0x18ab09000 -        0x18ab20fdf  libsystem_asl.dylib (406) <F40838DF-2F15-3F62-970F-DEE25706BF1B> /usr/lib/system/libsystem_asl.dylib
+       0x18c6c7000 -        0x18c6cf387  libsystem_symptoms.dylib (2169.120.7) <F5029F5C-1BF3-31C7-892E-BC8606AC829E> /usr/lib/system/libsystem_symptoms.dylib
+       0x19096b000 -        0x1909a3257  libsystem_containermanager.dylib (725.120.2) <518BE44D-AA31-31E6-B44B-A37AD5E47040> /usr/lib/system/libsystem_containermanager.dylib
+       0x191d7c000 -        0x191d805d7  libsystem_configuration.dylib (1405.120.5) <0F7BBC1C-3D50-3E59-A31F-E4672A80BCEB> /usr/lib/system/libsystem_configuration.dylib
+       0x191d81000 -        0x191d878cf  libsystem_sandbox.dylib (2680.120.12) <EC3A75EA-44C0-3A0B-9BF7-71C117B0A9C6> /usr/lib/system/libsystem_sandbox.dylib
+       0x1933db000 -        0x1933de1fb  libquarantine.dylib (196.120.2) <5849009B-ACA3-3796-94C4-BBDF8D300EBA> /usr/lib/system/libquarantine.dylib
+       0x193b7a000 -        0x193b80d03  libsystem_coreservices.dylib (191.4.5) <9576143B-C303-35A3-BA63-1FD06EDA2BB1> /usr/lib/system/libsystem_coreservices.dylib
+       0x194105000 -        0x194142a77  libsystem_m.dylib (3312.100.1) <A7E0863C-101A-31A0-922B-ED9B02626151> /usr/lib/system/libsystem_m.dylib
+       0x194144000 -        0x194147527  libmacho.dylib (1378) <755441B4-C034-3E3A-8E3C-F424FBB28261> /usr/lib/system/libmacho.dylib
+       0x194161000 -        0x19416e3a7  libcommonCrypto.dylib (600035) <CE357BB1-2D49-37CC-9FFE-D093936B1475> /usr/lib/system/libcommonCrypto.dylib
+       0x19416f000 -        0x194178ca3  libunwind.dylib (2100.2) <FC8F0C4E-6FB0-3E27-ABEF-B0FA720CD5E4> /usr/lib/system/libunwind.dylib
+       0x194181000 -        0x19418b7ff  libcopyfile.dylib (240) <8ACFAC7A-88E9-3EF4-853F-A9140FF110E5> /usr/lib/system/libcopyfile.dylib
+       0x19418c000 -        0x19418f987  libcompiler_rt.dylib (103.3) <AA79151F-C19D-3C7C-92F8-B10F04D82C1C> /usr/lib/system/libcompiler_rt.dylib
+       0x194190000 -        0x19419478b  libsystem_collections.dylib (1752.120.2) <72DB5BE7-EF78-37D0-8AAD-53E37CFE4287> /usr/lib/system/libsystem_collections.dylib
+       0x194195000 -        0x1941984cf  libsystem_secinit.dylib (168.100.7) <E525C566-CDA4-3D99-B12B-1615FD54A1F3> /usr/lib/system/libsystem_secinit.dylib
+       0x194199000 -        0x19419bbf7  libremovefile.dylib (85.100.6) <635E661D-80A7-340D-A165-3F7D318FDFC9> /usr/lib/system/libremovefile.dylib
+       0x19419c000 -        0x19419cf27  libkeymgr.dylib (31) <8C08891A-DF1C-3DCC-AB64-4742FD6BE9BA> /usr/lib/system/libkeymgr.dylib
+       0x19419d000 -        0x1941a5e37  libsystem_dnssd.dylib (2881.120.11) <6F45DF3F-233B-3BC3-BA8C-B43E7DA884BF> /usr/lib/system/libsystem_dnssd.dylib
+       0x1941a6000 -        0x1941ab09b  libcache.dylib (95) <189B576E-6176-3F82-8FA4-5914B0BEAEE7> /usr/lib/system/libcache.dylib
+       0x1941ac000 -        0x1941adce3  libSystem.B.dylib (1356) <BA6A669A-3BB9-3BC7-85E8-8F0C1E68351E> /usr/lib/libSystem.B.dylib
+       0x287468000 -        0x28746f349  libRosetta.dylib (367.9) <8651ED4F-6506-3788-B56B-32EE414A85CA> /usr/lib/libRosetta.dylib
+       0x289085000 -        0x289088a4b  libsystem_darwindirectory.dylib (122) <CF277A2C-C818-3F16-8B3F-3C7B39FCD164> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x289089000 -        0x2890925d3  libsystem_eligibility.dylib (319.121.1) <DDAC0531-0262-3DDC-8EC8-80EB9438847A> /usr/lib/system/libsystem_eligibility.dylib
+       0x289093000 -        0x28909a88b  libsystem_sanitizers.dylib (26.1) <44C4234F-8B2D-38D3-A774-B4B3C75AF3A7> /usr/lib/system/libsystem_sanitizers.dylib
+       0x28909b000 -        0x28909bbb7  libsystem_trial.dylib (474.2.18.2) <68C583BA-AFF5-3916-86AE-6E38BFEF98D6> /usr/lib/system/libsystem_trial.dylib

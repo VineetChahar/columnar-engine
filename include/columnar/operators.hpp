@@ -135,7 +135,17 @@ class HashJoinOperator : public Operator {
   std::vector<std::string> output_names_;
   bool built_ = false;
   ExecBatch build_batch_;
-  std::unordered_map<std::string, std::vector<std::uint32_t>> build_index_;
+  // Two build-index representations, not one: a flamegraph of the join+
+  // group-by benchmark (see README.md "Flamegraph-driven optimization")
+  // showed stringify_key()'s std::to_string()+concatenation as one of the
+  // hottest leaves, entirely avoidable for the common case of an int64
+  // join key -- which is also the overwhelmingly common case in practice
+  // (joining on an id column). int64 keys skip string-building and hash
+  // the raw value directly; every other key type still goes through the
+  // general string-keyed path.
+  bool int64_keyed_ = false;
+  std::unordered_map<std::int64_t, std::vector<std::uint32_t>> build_index_int64_;
+  std::unordered_map<std::string, std::vector<std::uint32_t>> build_index_string_;
 };
 
 class SortOperator : public Operator {
