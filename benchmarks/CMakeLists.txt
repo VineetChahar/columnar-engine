@@ -3,3 +3,6 @@ target_link_libraries(columnar_bench_encoding PRIVATE columnar_core benchmark::b
 
 add_executable(columnar_bench_operators bench_operators.cpp)
 target_link_libraries(columnar_bench_operators PRIVATE columnar_core benchmark::benchmark)
+
+add_executable(columnar_bench_vector_size_sweep bench_vector_size_sweep.cpp)
+target_link_libraries(columnar_bench_vector_size_sweep PRIVATE columnar_core benchmark::benchmark)

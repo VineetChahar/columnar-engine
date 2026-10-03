@@ -7,8 +7,13 @@
 namespace columnar {
 
 // The number of rows in one storage chunk / execution vector. See DESIGN.md
-// section 2 for the cache-hierarchy reasoning; Phase 3 re-derives this value
-// from a benchmark sweep rather than taking it on faith.
+// section 2 for the cache-hierarchy reasoning, and
+// benchmarks/bench_vector_size_sweep.cpp for the measured sweep: it confirms
+// the qualitative claim (64 rows measurably hurts, ~13-17% slower) but does
+// NOT sharply validate 2048 as uniquely optimal on this hardware -- 1024
+// through 65536 all land within noise of each other. Named explicitly
+// rather than overclaimed; see DESIGN.md section 2's update for the honest
+// read on what the sweep did and didn't show.
 inline constexpr std::size_t kVectorSize = 2048;
 
 enum class TypeId : std::uint8_t {

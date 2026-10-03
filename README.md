@@ -64,6 +64,33 @@ cmake --build build -j && ./build/tests/columnar_tests
 
 ## The numbers
 
+### Vector size sweep (Phase 0's deferred claim, actually run)
+
+DESIGN.md section 2 originally deferred this as `[TODO: benchmark]` and, for
+a while, several docs (including an interview-prep summary) described it as
+already done — it wasn't. `benchmarks/bench_vector_size_sweep.cpp` closes
+that gap for real: a filter-then-sum-through-a-selection-vector
+microbenchmark (the same shape `FilterOperator` actually uses) over a fixed
+~4.2M-row total, varying only the batch size:
+
+| vector_size | items/sec (median of 3) |
+|---|---|
+| 64 | 245.9M/s |
+| 1024 | 283.9M/s |
+| 2048 | 278.2M/s |
+| 4096 | 281.4M/s |
+| 65536 | 281.4M/s |
+
+**Honest read:** 1024 through 65536 are within ~5% noise of each other on
+this hardware (4MB L2/core) — there's no sharp optimum at 2048 specifically,
+and no visible cache-blowout at 65536. The one clear effect is at the small
+end: vector_size=64 is ~13-17% slower than everything else, confirming the
+qualitative "too small reintroduces per-batch overhead" claim without
+proving 2048 is *the* best choice. 2048 remains reasonable (nowhere near the
+bad end of the curve) — just not provably optimal on this specific
+microbenchmark. See DESIGN.md section 2 and LEARNING.md item 19 for the full
+writeup and what caught the original overclaim.
+
 ### Dictionary + RLE encoding (Phase 1)
 
 2048-row vector, `WHERE country = 'val_0'`-style equality scan, Apple

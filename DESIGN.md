@@ -83,12 +83,43 @@ Why 2048, in terms of cache math:
   transient memory cost of selection vectors and intermediate buffers.
 
 2048 is the accepted sweet spot industry-wide for this reason, but "the
-industry does it" is not a justification I can defend alone — Phase 3 will
-sweep vector size (64 / 256 / 1024 / 2048 / 4096 / 16384) against a filter+
-aggregate microbenchmark and plot throughput vs. size, so the interview
-answer is a graph, not a citation.
+industry does it" is not a justification I can defend alone — the plan was
+to sweep vector size (64 / 256 / 1024 / 2048 / 4096 / 16384) against a
+filter+aggregate microbenchmark and plot throughput vs. size, so the
+interview answer would be a graph, not a citation.
 
-`[TODO: benchmark]` Vector size sweep, Phase 3.
+**Update, after actually running it** (`benchmarks/bench_vector_size_sweep.cpp`,
+a representative filter-then-sum-through-a-selection-vector microbenchmark,
+the same two-pass shape `FilterOperator::next()` actually uses, run over a
+fixed ~4.2M-row total so only batch size varies): the result is more modest
+than the framing above implied, and is reported as measured rather than
+smoothed into a cleaner story.
+
+| vector_size | items/sec (median of 3) |
+|---|---|
+| 64 | 245.9M/s |
+| 256 | 269.6M/s |
+| 1024 | 283.9M/s |
+| 2048 | 278.2M/s |
+| 4096 | 281.4M/s |
+| 16384 | 271.1M/s |
+| 65536 | 281.4M/s |
+
+Throughput is flat — within ~5% noise of each other — from 1024 through
+65536 on this hardware (Apple Silicon, 4MB L2 per core); there is no sharp
+optimum at 2048 specifically, and no visible cache-blowout penalty even at
+65536 rows, likely because this core's L2 is large enough to absorb a
+65536-entry `uint32_t` selection vector (256KB) for this particular
+microbenchmark's working set. The one clear, real effect: **vector_size=64
+is ~13-17% slower than everything else** — confirming the qualitative claim
+("too small reintroduces per-batch overhead") without sharply validating
+2048 as uniquely better than, say, 4096 or 65536. The honest conclusion:
+2048 was a reasonable, defensible choice (it's nowhere near the bad end of
+the curve), but this specific microbenchmark doesn't prove it's *the*
+optimum — a claim this document no longer makes. This is the kind of result
+the project's own "measure, don't assert" rule exists for: it would have
+been easy to just assert the sweep validated 2048 and move on, and that
+would have been false.
 
 ---
 

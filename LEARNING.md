@@ -331,6 +331,26 @@ flamegraph shows, in text form. `profiling/q8_join_before_optimization.sample.tx
 is that raw output, committed as evidence for the optimization in
 README.md rather than just asserted.
 
+## 19. A `[TODO: benchmark]` marker left unresolved is still an overclaim
+
+DESIGN.md section 2 flagged a vector-size sweep as a `[TODO: benchmark]`
+back in Phase 0 -- an honest marker at the time. It was never actually run
+during Phases 1-6, but the `kVectorSize` comment in `types.hpp` kept saying
+"re-derived from a benchmark sweep rather than taking it on faith," and an
+interview-prep document generated near the end of the project flatly
+asserted "a vector-size sweep (64 to 16384) is in the benchmark suite." Both
+statements were false, and a later external review of the project caught
+the second one directly. The lesson isn't "double-check documents for
+typos" -- it's that **an unresolved TODO decays into a false claim the
+moment anything downstream (a code comment, a summary, a resume prep doc)
+starts describing the codebase as if the TODO were done.** Closing the loop
+meant actually writing `benchmarks/bench_vector_size_sweep.cpp` and running
+it (see DESIGN.md section 2's update), not just softening the wording back
+to "not done yet" -- and the real result was more modest than the original
+framing implied (no sharp optimum at 2048, just a real penalty at the very
+small end), which is a better, truer answer to have ready than either the
+false claim or a vague "it's probably fine."
+
 ## Quiz (Phases 2-6)
 
 1. Why are the AST (`ast.hpp`) and the bound logical plan
